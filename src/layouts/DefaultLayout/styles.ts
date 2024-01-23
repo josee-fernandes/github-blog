@@ -12,5 +12,9 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
     no-repeat ${(props) => props.theme.profile};
   display: flex;
   justify-content: center;
-  align-items: center;
+
+  & > img {
+    margin-top: -4rem;
+    max-width: 9.25rem;
+  }
 `
