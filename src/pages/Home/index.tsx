@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 import { Profile } from './components/Profile'
 
@@ -19,14 +21,14 @@ const posts = [
     title: 'JavaScript data types and data structures',
     content:
       'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.',
-    createdAt: new Date().toISOString(),
+    createdAt: new Date('2024-01-23').toISOString(),
   },
   {
     id: 2,
     title: 'JavaScript data types and data structures',
     content:
       'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.',
-    createdAt: new Date().toISOString(),
+    createdAt: new Date('2024-01-23').toISOString(),
   },
 ]
 
@@ -71,7 +73,12 @@ export function Home() {
           <li key={post.id}>
             <header>
               <h2>{post.title}</h2>
-              <span>{post.createdAt}</span>
+              <span>
+                {formatDistanceToNow(post.createdAt, {
+                  locale: ptBR,
+                  addSuffix: true,
+                })}
+              </span>
             </header>
             <p>{post.content}</p>
           </li>
