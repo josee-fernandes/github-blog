@@ -3,9 +3,10 @@ import styled from 'styled-components'
 export const HomeContainer = styled.div``
 
 export const FormContainer = styled.div`
-  max-width: 54rem;
+  max-width: 55rem;
   width: 100%;
   margin: 4.5rem auto 0;
+  padding: 0 1rem;
 
   header {
     display: flex;
@@ -54,15 +55,22 @@ export const PostsContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  max-width: 54rem;
+  max-width: 55rem;
   width: 100%;
   margin: 3rem auto 0;
+  padding: 0 1rem;
 
   li {
     list-style-type: none;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
     padding: 2rem;
     border-radius: 10px;
     background: ${(props) => props.theme.post};
+    color: ${(props) => props.theme.text};
     overflow: hidden;
 
     header {

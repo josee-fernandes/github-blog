@@ -1,7 +1,12 @@
 import styled from 'styled-components'
 
-export const ProfileContainer = styled.div`
-  max-width: 54rem;
+export const ProfileContainer = styled.header`
+  max-width: 55rem;
+  padding: 0 1rem;
+  margin: -5.5rem auto 0;
+`
+
+export const ProfileContent = styled.div`
   width: 100%;
   padding: 2rem;
   border-radius: 10px;
@@ -9,7 +14,6 @@ export const ProfileContainer = styled.div`
   align-items: center;
   gap: 2rem;
   background: ${(props) => props.theme.profile};
-  margin: -5.5rem auto 0;
   box-shadow: 0 0.125rem 1.75rem 0 rgba(0, 0, 0, 0.2);
 
   img {
@@ -21,6 +25,12 @@ export const ProfileContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
 
     a {
       color: ${(props) => props.theme.blue};
@@ -50,7 +60,7 @@ export const UserBadges = styled.div`
   & > div {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
 
     svg {
       color: ${(props) => props.theme.label};

@@ -8,6 +8,7 @@ import { Profile } from './components/Profile'
 
 import { FormContainer, HomeContainer, PostsContainer } from './styles'
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 const searchPostFormSchema = z.object({
   query: z.string(),
@@ -68,22 +69,26 @@ export function Home() {
           />
         </form>
       </FormContainer>
-      <PostsContainer>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <header>
-              <h2>{post.title}</h2>
-              <span>
-                {formatDistanceToNow(post.createdAt, {
-                  locale: ptBR,
-                  addSuffix: true,
-                })}
-              </span>
-            </header>
-            <p>{post.content}</p>
-          </li>
-        ))}
-      </PostsContainer>
+      <main>
+        <PostsContainer>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <Link to={`/${post.id}`}>
+                <header>
+                  <h2>{post.title}</h2>
+                  <span>
+                    {formatDistanceToNow(post.createdAt, {
+                      locale: ptBR,
+                      addSuffix: true,
+                    })}
+                  </span>
+                </header>
+                <p>{post.content}</p>
+              </Link>
+            </li>
+          ))}
+        </PostsContainer>
+      </main>
     </HomeContainer>
   )
 }
