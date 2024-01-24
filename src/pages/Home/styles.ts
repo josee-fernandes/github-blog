@@ -49,3 +49,61 @@ export const FormContainer = styled.div`
     }
   }
 `
+
+export const PostsContainer = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 54rem;
+  width: 100%;
+  margin: 3rem auto 0;
+
+  li {
+    list-style-type: none;
+    padding: 2rem;
+    border-radius: 10px;
+    background: ${(props) => props.theme.post};
+    overflow: hidden;
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.6;
+        color: ${(props) => props.theme.title};
+      }
+
+      span {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: ${(props) => props.theme.span};
+        text-align: right;
+        display: block;
+        width: max-content;
+        white-space: nowrap;
+        margin-top: 0.31rem;
+      }
+    }
+
+    p {
+      margin-top: 1.25rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* white-space: nowrap; */
+      width: 100%;
+      max-height: calc(1.6 * 4);
+      line-height: 1.6;
+
+      display: block;
+      line-clamp: 4;
+      box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+    }
+  }
+`
