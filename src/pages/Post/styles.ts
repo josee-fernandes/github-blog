@@ -40,5 +40,6 @@ export const PostContentContainer = styled.main`
   img {
     width: 100%;
     border-radius: 6px;
+    margin-top: 2rem;
   }
 `

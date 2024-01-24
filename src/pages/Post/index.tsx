@@ -20,18 +20,20 @@ export function Post() {
         <Markdown
           components={{
             code(props) {
-              const { children, className, node, ...rest } = props
+              const { children, className, ...rest } = props
               const match = /language-(\w+)/.exec(className || '')
               return match ? (
                 <SyntaxHighlighter
                   {...rest}
+                  ref={null}
                   PreTag="div"
-                  children={String(children).replace(/\n$/, '')}
                   language={match[1]}
                   style={dark}
-                />
+                >
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
               ) : (
-                <code {...rest} className={className}>
+                <code className={className} {...rest}>
                   {children}
                 </code>
               )

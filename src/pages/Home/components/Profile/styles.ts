@@ -16,6 +16,10 @@ export const ProfileContent = styled.div`
   background: ${(props) => props.theme.profile};
   box-shadow: 0 0.125rem 1.75rem 0 rgba(0, 0, 0, 0.2);
 
+  & > div {
+    width: 100%;
+  }
+
   img {
     border-radius: 8px;
     max-width: 9.25rem;
