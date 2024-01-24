@@ -9,6 +9,8 @@ import {
 import { Github } from '../../../../assets/icons/Github'
 import { Link } from 'react-router-dom'
 
+// https://api.github.com/users/josee-fernandes
+
 export function Profile() {
   return (
     <ProfileContainer>
