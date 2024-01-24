@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import { PostType } from '../../../Home'
 
 import { PostBadges, PostInfoContainer, PostInfoContent } from './styles'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowUpRightFromSquare,
@@ -11,7 +13,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Github } from '../../../../assets/icons/Github'
 
-export function PostInfo() {
+interface PostInfoProps {
+  post: PostType | null
+}
+
+export function PostInfo({ post }: PostInfoProps) {
   return (
     <PostInfoContainer>
       <PostInfoContent>
@@ -21,7 +27,7 @@ export function PostInfo() {
             <span>VOLTAR</span>
           </Link>
           <Link
-            to="https://github.com/josee-fernandes"
+            to={post?.html_url || ''}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -29,19 +35,25 @@ export function PostInfo() {
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
           </Link>
         </nav>
-        <h1>JavaScript data types and data structures</h1>
+        <h1>{post?.title}</h1>
         <PostBadges>
           <div>
             <Github />
-            <span>cameronwll</span>
+            <span>{post?.user.login}</span>
           </div>
           <div>
             <FontAwesomeIcon icon={faCalendarDay} />
-            <span>Há 1 dia</span>
+            <span>
+              {post &&
+                formatDistanceToNow(post.created_at, {
+                  locale: ptBR,
+                  addSuffix: true,
+                })}
+            </span>
           </div>
           <div>
             <FontAwesomeIcon icon={faComment} />
-            <span>5 comentários</span>
+            <span>{post?.comments} comentários</span>
           </div>
         </PostBadges>
       </PostInfoContent>

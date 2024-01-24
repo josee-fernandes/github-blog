@@ -18,7 +18,7 @@ const searchPostFormSchema = z.object({
 
 type SearchPostFormSchemaType = z.infer<typeof searchPostFormSchema>
 
-type PostType = typeof issue
+export type PostType = typeof issue
 
 export function Home() {
   const { register, handleSubmit, watch } = useForm<SearchPostFormSchemaType>({
@@ -33,8 +33,6 @@ export function Home() {
 
   async function fetchPosts() {
     const response = await api.get('/repos/josee-fernandes/github-blog/issues')
-
-    console.log(response.data)
 
     setPosts(response.data)
   }
@@ -74,7 +72,7 @@ export function Home() {
         <PostsContainer>
           {posts.map((post) => (
             <li key={post.id}>
-              <Link to={`/${post.id}`}>
+              <Link to={`/${post.number}`}>
                 <header>
                   <h2>{post.title}</h2>
                   <span>
