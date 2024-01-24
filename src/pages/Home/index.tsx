@@ -11,6 +11,7 @@ import { ptBR } from 'date-fns/locale'
 import { Profile } from './components/Profile'
 
 import { FormContainer, HomeContainer, PostsContainer } from './styles'
+import { GITHUB_REPOSITORY, GITHUB_USERNAME } from '../../constants'
 
 const searchPostFormSchema = z.object({
   query: z.string(),
@@ -37,19 +38,19 @@ export function Home() {
     setPosts(response.data)
   }
 
-  function searchPost(data: SearchPostFormSchemaType) {
-    console.log(data)
+  async function fetchFilteredPosts(data: SearchPostFormSchemaType) {
+    const response = await api.get(
+      `/search/issues?q=${data.query}%20repo:${GITHUB_USERNAME}/${GITHUB_REPOSITORY}`,
+    )
+
+    setPosts(response.data.items)
   }
 
   const query = watch('query')
 
   useEffect(() => {
-    handleSubmit(searchPost)()
-  }, [query, handleSubmit])
-
-  useEffect(() => {
-    fetchPosts()
-  }, [])
+    if (posts.length === 0 && query.length === 0) fetchPosts()
+  }, [posts, query])
 
   return (
     <HomeContainer>
@@ -59,7 +60,7 @@ export function Home() {
           <h3>Publicações</h3>
           <span>{posts?.length || 0} publicações</span>
         </header>
-        <form ref={formRef} onSubmit={handleSubmit(searchPost)}>
+        <form ref={formRef} onSubmit={handleSubmit(fetchFilteredPosts)}>
           <input
             type="text"
             placeholder="Buscar conteúdo"

@@ -11,10 +11,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api } from '../../../../lib/axios'
 import { user } from '../../../../utils/example'
-
-// https://api.github.com/users/josee-fernandes
-
-const name = 'josee-fernandes'
+import { GITHUB_USERNAME } from '../../../../constants'
 
 type UserType = typeof user
 
@@ -22,7 +19,7 @@ export function Profile() {
   const [user, setUser] = useState<UserType | null>(null)
 
   async function fetchUser() {
-    const response = await api.get(`/users/${name}`)
+    const response = await api.get(`/users/${GITHUB_USERNAME}`)
 
     setUser(response.data)
   }
