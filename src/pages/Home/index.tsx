@@ -57,7 +57,7 @@ export function Home() {
       <FormContainer>
         <header>
           <h3>Publicações</h3>
-          <span>6 publicações</span>
+          <span>{posts?.length || 0} publicações</span>
         </header>
         <form ref={formRef} onSubmit={handleSubmit(searchPost)}>
           <input
