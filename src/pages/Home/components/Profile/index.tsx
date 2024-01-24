@@ -10,49 +10,11 @@ import { Github } from '../../../../assets/icons/Github'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api } from '../../../../lib/axios'
+import { user } from '../../../../utils/example'
 
 // https://api.github.com/users/josee-fernandes
 
 const name = 'josee-fernandes'
-
-const user = {
-  login: 'josee-fernandes',
-  id: 51970876,
-  node_id: 'MDQ6VXNlcjUxOTcwODc2',
-  avatar_url: 'https://avatars.githubusercontent.com/u/51970876?v=4',
-  gravatar_id: '',
-  url: 'https://api.github.com/users/josee-fernandes',
-  html_url: 'https://github.com/josee-fernandes',
-  followers_url: 'https://api.github.com/users/josee-fernandes/followers',
-  following_url:
-    'https://api.github.com/users/josee-fernandes/following{/other_user}',
-  gists_url: 'https://api.github.com/users/josee-fernandes/gists{/gist_id}',
-  starred_url:
-    'https://api.github.com/users/josee-fernandes/starred{/owner}{/repo}',
-  subscriptions_url:
-    'https://api.github.com/users/josee-fernandes/subscriptions',
-  organizations_url: 'https://api.github.com/users/josee-fernandes/orgs',
-  repos_url: 'https://api.github.com/users/josee-fernandes/repos',
-  events_url: 'https://api.github.com/users/josee-fernandes/events{/privacy}',
-  received_events_url:
-    'https://api.github.com/users/josee-fernandes/received_events',
-  type: 'User',
-  site_admin: false,
-  name: 'José Fernandes',
-  company: null,
-  blog: 'www.linkedin.com/in/josee-fernandes',
-  location: 'São Vicente, SP',
-  email: null,
-  hireable: true,
-  bio: 'Front-end Developer',
-  twitter_username: null,
-  public_repos: 64,
-  public_gists: 1,
-  followers: 11,
-  following: 10,
-  created_at: '2019-06-18T19:23:48Z',
-  updated_at: '2024-01-20T02:13:02Z',
-}
 
 type UserType = typeof user
 

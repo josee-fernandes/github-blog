@@ -1,3 +1,7 @@
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { api } from '../../lib/axios'
+import { issue } from '../../utils/example'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -7,8 +11,6 @@ import { ptBR } from 'date-fns/locale'
 import { Profile } from './components/Profile'
 
 import { FormContainer, HomeContainer, PostsContainer } from './styles'
-import { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
 
 const searchPostFormSchema = z.object({
   query: z.string(),
@@ -16,22 +18,7 @@ const searchPostFormSchema = z.object({
 
 type SearchPostFormSchemaType = z.infer<typeof searchPostFormSchema>
 
-const posts = [
-  {
-    id: 1,
-    title: 'JavaScript data types and data structures',
-    content:
-      'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.',
-    createdAt: new Date('2024-01-23').toISOString(),
-  },
-  {
-    id: 2,
-    title: 'JavaScript data types and data structures',
-    content:
-      'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.',
-    createdAt: new Date('2024-01-23').toISOString(),
-  },
-]
+type PostType = typeof issue
 
 export function Home() {
   const { register, handleSubmit, watch } = useForm<SearchPostFormSchemaType>({
@@ -42,6 +29,16 @@ export function Home() {
   })
   const formRef = useRef<HTMLFormElement>(null)
 
+  const [posts, setPosts] = useState<PostType[]>([])
+
+  async function fetchPosts() {
+    const response = await api.get('/repos/josee-fernandes/github-blog/issues')
+
+    console.log(response.data)
+
+    setPosts(response.data)
+  }
+
   function searchPost(data: SearchPostFormSchemaType) {
     console.log(data)
   }
@@ -51,6 +48,10 @@ export function Home() {
   useEffect(() => {
     handleSubmit(searchPost)()
   }, [query, handleSubmit])
+
+  useEffect(() => {
+    fetchPosts()
+  }, [])
 
   return (
     <HomeContainer>
@@ -77,13 +78,13 @@ export function Home() {
                 <header>
                   <h2>{post.title}</h2>
                   <span>
-                    {formatDistanceToNow(post.createdAt, {
+                    {formatDistanceToNow(post.created_at, {
                       locale: ptBR,
                       addSuffix: true,
                     })}
                   </span>
                 </header>
-                <p>{post.content}</p>
+                <p>{post.body}</p>
               </Link>
             </li>
           ))}
